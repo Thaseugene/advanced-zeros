@@ -4,15 +4,9 @@ module.exports = function getZerosCount(number, base) {
     sor = [];
     var cc = 0;
     var c = 0;
-    step = base;
-
-    //return arr;
-
-
-
-
-
-    if (base % 2 === 0 && base % 3 === 0 && base % 5 === 0 && base % 7 === 0 && base % 11 === 0 && base % 13 === 0) {
+    var l = 1;
+    if (base != 10) {
+        var step = base;
         for (var i = 0; i < array.length; i++) {
             while (step % array[i] === 0) {
                 step = step / array[i];
@@ -26,7 +20,27 @@ module.exports = function getZerosCount(number, base) {
                 sor.push(arr[i]);
             } else { sor.push(arr[i]) };
         }
-        return (sor);
+    }
+    return (sor);
+    if (base === 10) {
+        while (Math.floor(number / Math.pow(5, l)) > 0) {
+            c = c + Math.floor(number / Math.pow(5, l));
+            l++;
+        }
+    } else {
+        while (Math.floor(number / Math.pow(base, l)) > 0) {
+            c = c + (Math.floor(number / Math.pow(base, l)));
+            l++;
+        }
+    }
+    //return c;
+    //return arr;
+
+
+
+
+
+    /*
 
 
 
