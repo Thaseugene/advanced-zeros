@@ -1,11 +1,14 @@
 module.exports = function getZerosCount(number, base) {
-    var array = [2, 3, 5, 7, 11, 13];
+    var array = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251];
     arr = [];
     sor = [];
-    var cc = 0;
+
+
     var c = 0;
     var l = 1;
-    if (base != 10) {
+    var h = 1;
+
+    if (base != 10 && base % 2 == 0 || base % 3 == 0 || base % 5 == 0 || base % 7 == 0 || base % 11 == 0 || base % 13 == 0) {
         var step = base;
         for (var i = 0; i < array.length; i++) {
             while (step % array[i] === 0) {
@@ -13,112 +16,51 @@ module.exports = function getZerosCount(number, base) {
                 arr.push(array[i]);
             }
         }
-        //return arr[arr.length - 1];
-        for (var i = (arr.length - 1); i >= 0; i--) {
-            if (arr[i] === arr[i - 1]) {
-                cc++;
+        for (var i = 0; i < arr.length - 1; i++) {
+            if (arr[i] === arr[i + 1]) {
+                h++;
                 sor.push(arr[i]);
-            } else { sor.push(arr[i]) };
+            }
         }
+        if (sor.length > 1 && h > 1) {
+            h = l;
+            while (Math.floor(number / Math.pow(sor[1], l)) > 0) {
+                c = c + Math.floor(number / Math.pow(sor[1], l));
+                l++;
+            }
+            return (c);
+        } else {
+
+            while (Math.floor(number / Math.pow(arr[arr.length - 1], l)) > 0) {
+                c = c + Math.floor(number / Math.pow(arr[arr.length - 1], l));
+                l++;
+
+            }
+
+            return (c);
+
+        }
+
+
     }
-    return (sor);
+
+
+
     if (base === 10) {
         while (Math.floor(number / Math.pow(5, l)) > 0) {
             c = c + Math.floor(number / Math.pow(5, l));
             l++;
         }
-    } else {
+        return (c);
+    }
+    if (base % 2 != 0 || base % 3 != 0 || base % 5 != 0 || base % 7 != 0 || base % 11 != 0 || base % 13 != 0) {
         while (Math.floor(number / Math.pow(base, l)) > 0) {
             c = c + (Math.floor(number / Math.pow(base, l)));
             l++;
         }
-    }
-    //return c;
-    //return arr;
-
-
-
-
-
-    /*
-
-
-
-    } else {
-        while (Math.floor(number / Math.pow(base, i)) > 0) {
-            c = c + (Math.floor(number / Math.pow(base, i)));
-            i++;
-            return c;
-        }
+        return (c);
     }
 
 
-    /*var c = 0;
-    var i = 1;
-    var m = number;
-    str = '';
-    array = [2, 3, 5, 7, 11, 13];
-    if (base % 2 === 0 && base != 10) {
-        var x = 2;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 2 + x;
-        }
-    }
-    if (base % 3 === 0) {
-        var x = 3;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 3 + x;
-        }
-    }
-    if (base % 5 === 0 && base != 10) {
-        var x = 5;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 5 + x;
-        }
-    }
-    if (base % 7 === 0) {
-        var x = 7;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 7 + x;
-        }
-    }
-    if (base % 11 === 0) {
-        var x = 11;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 11 + x;
-        }
-    }
-    if (base % 13 === 0) {
-        var x = 13;
-        while (Math.floor(number / Math.pow(x, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(x, i));
-            i++;
-            x = 13 + x;
-        }
-    }
-    if (base === 10) {
-        while (Math.floor(number / Math.pow(5, i)) > 0) {
-            c = c + Math.floor(number / Math.pow(5, i));
-            i++;
-        }
-    } else {
-        while (Math.floor(number / Math.pow(base, i)) > 0) {
-            c = c + (Math.floor(number / Math.pow(base, i)));
-            i++;
-        }
-    }
 
-    //console.log(c);
-
-    return c;*/
 }
